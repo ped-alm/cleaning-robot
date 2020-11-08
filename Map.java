@@ -35,10 +35,10 @@ public class Map {
         var sH = 0;
 
         if (isHorizontalExit) {
-            sW = random.nextInt(width);
+            sW = random.nextInt(width - 2) + 1;
             sH = random.nextInt(2) * (height - 1);
         } else {
-            sH = random.nextInt(height);
+            sH = random.nextInt(height - 2) + 1;
             sW = random.nextInt(2) * (width - 1);
         }
 
@@ -48,15 +48,21 @@ public class Map {
             var w = 0;
             var h = 0;
 
-            while (map[w][h] == '1' || map[w][h] == 'S') {
+            do {
                 w = random.nextInt(width);
                 h = random.nextInt(height);
-            }
+            } while (map[w][h] == '1' || map[w][h] == 'S' || isBlockingExit(w, h, map));
 
             map[w][h] = '1';
         }
 
         return map;
+    }
+
+    private static boolean isBlockingExit(int w, int h, char[][] map) {
+        if (map[w - 1][h] == 'S' || map[w][h + 1] == 'S' || map[w + 1][h] == 'S' || map[w][h - 1] == 'S')
+            return true;
+        return false;
     }
 
     public static void print(char[][] map) {
