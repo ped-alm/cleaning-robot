@@ -2,9 +2,6 @@ import java.util.Random;
 
 public class Map {
     public static char[][] build(int width, int height, int obstacles) {
-        width += 2;
-        height += 2;
-
         var map = new char[width][height];
         var random = new Random();
 
@@ -94,6 +91,8 @@ public class Map {
                 return Colors.yellow(str);
             case 'S':
                 return Colors.red(str);
+            case 'C':
+                return Colors.white(str);
             default:
                 return null;
         }

@@ -21,6 +21,10 @@ public class Colors {
         return print(ANSI_RED, str);
     }
 
+    public static String white(String str) {
+        return print(ANSI_WHITE, str);
+    }
+
     private static String print(String color, String str) {
         return color + str + ANSI_RESET;
     }
