@@ -2,6 +2,10 @@ import java.util.Random;
 
 public class Map {
     public static char[][] build(int width, int height, int obstacles) {
+        return build(width, height, obstacles, false);
+    }
+
+    public static char[][] build(int width, int height, int obstacles, boolean withWallObstacles) {
         var map = new char[width][height];
         var random = new Random();
 
@@ -48,7 +52,8 @@ public class Map {
             do {
                 w = random.nextInt(width);
                 h = random.nextInt(height);
-            } while (map[w][h] == '1' || map[w][h] == 'S' || isBlockingExit(w, h, map));
+            } while (map[w][h] == '1' || map[w][h] == 'S' || isBlockingExit(w, h, map)
+                    || shouldRemoveWall(withWallObstacles, w, h, map));
 
             map[w][h] = '1';
         }
@@ -56,10 +61,23 @@ public class Map {
         return map;
     }
 
+    private static boolean shouldRemoveWall(boolean withWallObstacles, int w, int h, char[][] map) {
+        if(withWallObstacles)
+            return false;
+
+        return (
+                map[w-1][h] == '1' ||
+                map[w+1][h] == '1' ||
+                map[w][h-1] == '1' ||
+                map[w][h+1] == '1' ||
+                map[w-1][h+1] == '1' ||
+                map[w+1][h+1] == '1' ||
+                map[w-1][h-1] == '1' ||
+                map[w+1][h-1] == '1');
+    }
+
     private static boolean isBlockingExit(int w, int h, char[][] map) {
-        if (map[w - 1][h] == 'S' || map[w][h + 1] == 'S' || map[w + 1][h] == 'S' || map[w][h - 1] == 'S')
-            return true;
-        return false;
+        return map[w - 1][h] == 'S' || map[w][h + 1] == 'S' || map[w + 1][h] == 'S' || map[w][h - 1] == 'S';
     }
 
     public static void print(char[][] map) {
@@ -81,20 +99,39 @@ public class Map {
         System.out.print(builder.toString());
     }
 
-    private static String colorfy(char c) {
-        var str = String.valueOf(c);
+    public static void print(int[][] map) {
+        var width = map.length;
+        var height = map[0].length;
+        var builder = new StringBuilder();
 
-        switch (c) {
-            case '1':
-                return Colors.cyan(str);
-            case '0':
+        builder.append("\n");
+        for (var h = height - 1; h >= 0; h--) {
+            for (var w = 0; w < width - 1; w++) {
+                builder.append(colorfy(Integer.toString(map[w][h])));
+                builder.append(" ");
+            }
+
+            builder.append(colorfy(Integer.toString(map[width - 1][h])));
+            builder.append("\n");
+        }
+
+        System.out.print(builder.toString());
+    }
+
+    private static String colorfy(String str) {
+        switch (str) {
+            case "0":
                 return Colors.yellow(str);
-            case 'S':
+            case "S":
                 return Colors.red(str);
-            case 'C':
+            case "C":
                 return Colors.white(str);
             default:
-                return null;
+                return Colors.cyan("1"); //TODO FIX GAMBIARRA
         }
+    }
+
+    private static String colorfy(char c) {
+        return colorfy(String.valueOf(c));
     }
 }
