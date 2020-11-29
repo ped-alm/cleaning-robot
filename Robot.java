@@ -2,8 +2,8 @@ public class Robot {
 
     private static final int X = 0;
     private static final int Y = 1;
-    private static final boolean DEBUG = true;
-    private static final int DEBUG_SPEED = 1;
+    private static boolean DEBUG = false;
+    private static int DEBUG_SPEED = 1;
 
     private static int[][] buildBaseVisitedMap(char[][] map) {
         var width = map.length; // X
@@ -160,5 +160,13 @@ public class Robot {
             default:
                 return Colors.purple("X");
         }
+    }
+
+    public static void setDebug(boolean b) {
+        DEBUG = b;
+    }
+
+    public static void setDebugSpeed(int i) {
+        DEBUG_SPEED = i;
     }
 }

@@ -1,10 +1,6 @@
 import java.util.Random;
 
 public class Map {
-    public static char[][] build(int width, int height, int obstacles) {
-        return build(width, height, obstacles, false);
-    }
-
     public static char[][] build(int width, int height, int obstacles, boolean withWallObstacles) {
         var map = new char[width][height];
         var random = new Random();
@@ -67,13 +63,13 @@ public class Map {
 
         return (
                 map[w - 1][h] == '1' ||
-                        map[w + 1][h] == '1' ||
-                        map[w][h - 1] == '1' ||
-                        map[w][h + 1] == '1' ||
-                        map[w - 1][h + 1] == '1' ||
-                        map[w + 1][h + 1] == '1' ||
-                        map[w - 1][h - 1] == '1' ||
-                        map[w + 1][h - 1] == '1');
+                map[w + 1][h] == '1' ||
+                map[w][h - 1] == '1' ||
+                map[w][h + 1] == '1' ||
+                map[w - 1][h + 1] == '1' ||
+                map[w + 1][h + 1] == '1' ||
+                map[w - 1][h - 1] == '1' ||
+                map[w + 1][h - 1] == '1');
     }
 
     private static boolean isBlockingExit(int w, int h, char[][] map) {
