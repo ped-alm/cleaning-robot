@@ -99,25 +99,6 @@ public class Map {
         System.out.print(builder.toString());
     }
 
-    public static void print(int[][] map) {
-        var width = map.length;
-        var height = map[0].length;
-        var builder = new StringBuilder();
-
-        builder.append("\n");
-        for (var h = height - 1; h >= 0; h--) {
-            for (var w = 0; w < width - 1; w++) {
-                builder.append(colorfy(Integer.toString(map[w][h])));
-                builder.append(" ");
-            }
-
-            builder.append(colorfy(Integer.toString(map[width - 1][h])));
-            builder.append("\n");
-        }
-
-        System.out.print(builder.toString());
-    }
-
     private static String colorfy(String str) {
         switch (str) {
             case "0":
