@@ -25,6 +25,14 @@ public class Colors {
         return print(ANSI_WHITE, str);
     }
 
+    public static String green(String str) {
+        return print(ANSI_GREEN, str);
+    }
+
+    public static String purple(String str) {
+        return print(ANSI_PURPLE, str);
+    }
+
     private static String print(String color, String str) {
         return color + str + ANSI_RESET;
     }
