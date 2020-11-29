@@ -36,10 +36,8 @@ public class Main {
 //                {'1', 'S', '1', '1', '1', '1', '1', '1', '1', '1'},
 //        };
 
-        Map.print(testMap1);
         Robot.clean(testMap1);
         System.out.println("ok");
-        Map.print(testMap1);
 //        var map = Map.build(15, 10, 10);
 
 //        for(var i=0; i<map.length; i++) {

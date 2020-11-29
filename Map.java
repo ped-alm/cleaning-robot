@@ -62,18 +62,18 @@ public class Map {
     }
 
     private static boolean shouldRemoveWall(boolean withWallObstacles, int w, int h, char[][] map) {
-        if(withWallObstacles)
+        if (withWallObstacles)
             return false;
 
         return (
-                map[w-1][h] == '1' ||
-                map[w+1][h] == '1' ||
-                map[w][h-1] == '1' ||
-                map[w][h+1] == '1' ||
-                map[w-1][h+1] == '1' ||
-                map[w+1][h+1] == '1' ||
-                map[w-1][h-1] == '1' ||
-                map[w+1][h-1] == '1');
+                map[w - 1][h] == '1' ||
+                        map[w + 1][h] == '1' ||
+                        map[w][h - 1] == '1' ||
+                        map[w][h + 1] == '1' ||
+                        map[w - 1][h + 1] == '1' ||
+                        map[w + 1][h + 1] == '1' ||
+                        map[w - 1][h - 1] == '1' ||
+                        map[w + 1][h - 1] == '1');
     }
 
     private static boolean isBlockingExit(int w, int h, char[][] map) {
@@ -81,8 +81,8 @@ public class Map {
     }
 
     public static void print(char[][] map) {
-        var width = map.length;
-        var height = map[0].length;
+        var width = map.length; // X
+        var height = map[0].length; // Y
         var builder = new StringBuilder();
 
         builder.append("\n");
@@ -99,20 +99,15 @@ public class Map {
         System.out.print(builder.toString());
     }
 
-    private static String colorfy(String str) {
-        switch (str) {
-            case "0":
-                return Colors.yellow(str);
-            case "S":
-                return Colors.red(str);
-            case "C":
-                return Colors.white(str);
-            default:
-                return Colors.cyan("1"); //TODO FIX GAMBIARRA
-        }
-    }
-
     private static String colorfy(char c) {
-        return colorfy(String.valueOf(c));
+        var str = String.valueOf(c);
+        switch (c) {
+            case '0':
+                return Colors.yellow(str);
+            case 'S':
+                return Colors.red(str);
+            default:
+                return Colors.cyan(str);
+        }
     }
 }

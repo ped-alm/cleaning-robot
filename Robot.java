@@ -3,7 +3,7 @@ public class Robot {
     private static final int X = 0;
     private static final int Y = 1;
     private static final boolean DEBUG = true;
-    private static final int DEBUG_SPEED = 500;
+    private static final int DEBUG_SPEED = 1;
 
     private static int[][] buildBaseVisitedMap(char[][] map) {
         var width = map.length; // X
@@ -81,9 +81,9 @@ public class Robot {
 
     private static void tryMove(char[][] map, int[][] visitedMap, int[] newPos, int[] currentPos, int floorCounter) {
         if (canMove(map, visitedMap, newPos, currentPos)) {
-            if(visitedMap[newPos[X]][newPos[Y]] == 0) floorCounter--;
-            moveVisited(visitedMap, newPos);
-            if(floorCounter == 0) return;
+            if (visitedMap[newPos[X]][newPos[Y]] == 0) floorCounter--;
+            moveVisited(map, visitedMap, newPos);
+            if (floorCounter == 0) return;
             clean(map, visitedMap, newPos, floorCounter);
         }
     }
@@ -108,18 +108,22 @@ public class Robot {
         return new int[]{pos[X] - 1, pos[Y]};
     }
 
-    private static void moveVisited(int[][] visitedMap, int[] newPos) {
+    private static void moveVisited(char[][] map, int[][] visitedMap, int[] newPos) {
         visitedMap[newPos[X]][newPos[Y]] += 1;
 
-        if(DEBUG) {
+        if (DEBUG) {
+            Map.print(map);
             debugVisitedPrint(visitedMap);
-            try { Thread.sleep(DEBUG_SPEED); } catch (Exception e) {}
+            try {
+                Thread.sleep(DEBUG_SPEED);
+            } catch (Exception e) {
+            }
         }
     }
 
     private static void debugVisitedPrint(int[][] map) {
-        var width = map.length;
-        var height = map[0].length;
+        var width = map.length; // X
+        var height = map[0].length; // Y
         var builder = new StringBuilder();
 
         builder.append("\n");
@@ -140,7 +144,7 @@ public class Robot {
         var str = Integer.toString(i);
         switch (i) {
             case 0:
-                return Colors.white(str);
+                return Colors.cyan(str);
             case 1:
             case 2:
             case 3:
