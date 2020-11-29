@@ -80,7 +80,7 @@ public class Robot {
     }
 
     private static void tryMove(char[][] map, int[][] visitedMap, int[] newPos, int[] currentPos, int floorCounter) {
-        if (canMove(map, visitedMap, newPos, currentPos)) {
+        if (shouldMove(map, visitedMap, newPos, currentPos)) {
             if (visitedMap[newPos[X]][newPos[Y]] == 0) floorCounter--;
             moveVisited(map, visitedMap, newPos);
             if (floorCounter == 0) return;
@@ -88,7 +88,7 @@ public class Robot {
         }
     }
 
-    private static boolean canMove(char[][] map, int[][] visitedMap, int[] newPos, int[] currentPos) {
+    private static boolean shouldMove(char[][] map, int[][] visitedMap, int[] newPos, int[] currentPos) {
         return map[newPos[X]][newPos[Y]] == '0' && visitedMap[newPos[X]][newPos[Y]] < visitedMap[currentPos[X]][currentPos[Y]];
     }
 

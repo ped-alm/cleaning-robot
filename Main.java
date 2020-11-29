@@ -2,7 +2,7 @@ public class Main {
     // Optimal values to print on console already
     private static final int WIDTH = 15;
     private static final int HEIGHT = 10;
-    private static final int OBSTACLES = 20;
+    private static final int OBSTACLES = 15;
     private static final boolean WITH_WALLS = true;
 
     public static void main(String[] args) {
